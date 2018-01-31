@@ -19,7 +19,6 @@ export default class CountdownTimer extends React.Component {
             secondsRemaining: this.props.secondsRemaining,
             secondsTotal: this.props.secondsRemaining 
         });
-        this.interval = setInterval(this.tick, 1000);    
     }
 
     componentWillUnmount(){
@@ -36,8 +35,14 @@ export default class CountdownTimer extends React.Component {
         }    
     }
 
+
+    startTimer = () => {
+        this.interval = setInterval(this.tick, 1000);    
+    }
+
     render() {
         return (
+        <View>
             <ProgressCircle
             percent={this.state.percent}
             radius={80}
@@ -45,10 +50,11 @@ export default class CountdownTimer extends React.Component {
             color="#3399FF"
             shadowColor="#999"
             bgColor="#fff"
-        >
-            <Text style={{ fontSize: 18 }}>{this.state.secondsRemaining}</Text>
-            <Text>{this.state.percent}</Text>
-        </ProgressCircle>
+            >
+                <Text style={{ fontSize: 18 }}>{this.state.secondsRemaining}</Text>
+            </ProgressCircle>
+            <Button title="Start Timer" onPress={this.startTimer} />
+        </View>
         );
     }
 }
