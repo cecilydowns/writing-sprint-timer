@@ -14,6 +14,15 @@ export default class CountdownTimer extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.secondsRemaining !== this.state.secondsRemaining){
+            this.setState({
+                secondsRemaining: nextProps.secondsRemaining,
+                secondsTotal: nextProps.secondsRemaining
+            })
+        }
+    }
+
     componentDidMount(){
         this.setState({ 
             secondsRemaining: this.props.secondsRemaining,
@@ -28,7 +37,7 @@ export default class CountdownTimer extends React.Component {
     tick = () => {
         this.setState({
             secondsRemaining: this.state.secondsRemaining - 1,
-            percent: 100 - (this.state.secondsRemaining - 1) /  this.state.secondsTotal * 100
+            percent: 100 - ((this.state.secondsRemaining - 1) /  this.state.secondsTotal * 100)
         });
         if (this.state.secondsRemaining <= 0) {
           clearInterval(this.interval);
@@ -45,8 +54,8 @@ export default class CountdownTimer extends React.Component {
         <View>
             <ProgressCircle
             percent={this.state.percent}
-            radius={80}
-            borderWidth={8}
+            radius={120}
+            borderWidth={3}
             color="#3399FF"
             shadowColor="#999"
             bgColor="#fff"
