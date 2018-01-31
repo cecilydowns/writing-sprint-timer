@@ -15,18 +15,8 @@ export default class App extends React.Component {
 
         <Button title="Start Timer" onPress={this.startTimer} />
 
-        <CountdownTimer secondsRemaining={100} />
+        <CountdownTimer secondsRemaining={16} />
 
-        <ProgressCircle
-            percent={30}
-            radius={80}
-            borderWidth={8}
-            color="#3399FF"
-            shadowColor="#999"
-            bgColor="#fff"
-        >
-            <Text style={{ fontSize: 18 }}>{'29'}</Text>
-        </ProgressCircle>
       </View>
     );
   }
