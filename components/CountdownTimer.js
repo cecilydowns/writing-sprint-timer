@@ -10,7 +10,7 @@ export default class CountdownTimer extends React.Component {
         this.state = {
             secondsRemaining: null,
             secondsTotal: null,
-            percent: null
+            percent: 0
         }
     }
 
@@ -18,7 +18,7 @@ export default class CountdownTimer extends React.Component {
         if(nextProps.secondsRemaining !== this.state.secondsRemaining){
             this.setState({
                 secondsRemaining: nextProps.secondsRemaining,
-                secondsTotal: nextProps.secondsRemaining
+                minutesTotal: nextProps.secondsRemaining
             })
         }
     }
@@ -50,6 +50,17 @@ export default class CountdownTimer extends React.Component {
     }
 
     render() {
+
+            const secondsToMinutes = () => {
+            let seconds = this.state.secondsRemaining
+            let minutes = null
+            while(seconds > 59){
+                minutes += 1
+                seconds -= 60
+            }
+            return `${minutes}m${seconds}s`
+        }
+
         return (
         <View>
             <ProgressCircle
@@ -60,8 +71,9 @@ export default class CountdownTimer extends React.Component {
             shadowColor="#999"
             bgColor="#fff"
             >
-                <Text style={{ fontSize: 18 }}>{this.state.secondsRemaining}</Text>
+                <Text style={{ fontSize: 18 }}>{secondsToMinutes()}</Text>
             </ProgressCircle>
+            <Text>{this.state.secondsRemaining}</Text>
             <Button title="Start Timer" onPress={this.startTimer} />
         </View>
         );
