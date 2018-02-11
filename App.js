@@ -37,6 +37,12 @@ export default class App extends React.Component {
             <CountdownTimer secondsRemaining={this.state.timeSelected * 60} />
         </View>
 
+        <View style={styles.navContainer}>
+          <Text style={styles.navItem}>Home</Text>
+          <Text style={styles.navItem}>History</Text>
+          <Text style={styles.navItem}>Settings</Text>
+        </View>
+
       </View>
     );
   }
@@ -58,6 +64,15 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'flex-start',
     alignItems: 'center'
+  },
+  navContainer: {
+    flexDirection: 'row',
+    height: 50
+    },
+  navItem: {
+    flex: 1,
+    textAlign: 'center'
+
   },
   timeInput: {
     height: 60,
