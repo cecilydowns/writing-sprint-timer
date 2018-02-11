@@ -32,9 +32,8 @@ export default class App extends React.Component {
           /> 
           <Text>minutes</Text>
       </View>
-        <Text>{this.state.timeSelected}</Text>
         
-        <CountdownTimer secondsRemaining={this.state.timeSelected} />
+        <CountdownTimer secondsRemaining={this.state.timeSelected * 60} />
 
       </View>
     );
