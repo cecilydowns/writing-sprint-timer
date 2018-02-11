@@ -31,9 +31,11 @@ export default class App extends React.Component {
             placeHolder="Select a time"
           /> 
           <Text>minutes</Text>
-      </View>
+       </View>
         
-        <CountdownTimer secondsRemaining={this.state.timeSelected * 60} />
+        <View style={styles.countdownContainer}>
+            <CountdownTimer secondsRemaining={this.state.timeSelected * 60} />
+        </View>
 
       </View>
     );
@@ -43,11 +45,19 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch'
+  },
+  formContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
-  formContainer: {
-
+  countdownContainer: {
+    flex: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
   timeInput: {
     height: 60,
