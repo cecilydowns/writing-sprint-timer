@@ -67,7 +67,9 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     flexDirection: 'row',
-    height: 50
+    height: 80,
+    backgroundColor: '#fafafa',
+    padding: 20   
     },
   navItem: {
     flex: 1,
