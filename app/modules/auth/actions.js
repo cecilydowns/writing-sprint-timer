@@ -15,6 +15,8 @@ export function register(data, successCB, errorCB) {
 
 export function createUser(user, successCB, errorCB) {
     return (dispatch) => {
+        // console.log("WHAT'S USER HERE?")
+        // console.log(user)
         api.createUser(user, function (success, data, error) {
             if (success) {
                 dispatch({type: t.LOGGED_IN, data: user});
