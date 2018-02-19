@@ -1,88 +1,48 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import ProgressCircle from 'react-native-progress-circle'
-import CountdownTimer from './components/CountdownTimer'
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { Font, AppLoading } from 'expo';
 
-export default class App extends React.Component {
+import Router from './app/config/routes'
+import store from './app/redux/store';
 
-  constructor(){
-    super()
-    this.state = {
-      timeSelected: "15"
-    }
-  }
-
-  onChange = (text) => {
-    // code to remove non-numeric characters from text
-    this.setState({timeSelected: text})
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>       
-
-        <View style={styles.formContainer}>
-          <Text>I would like to write for</Text>
-          <TextInput 
-            style={styles.timeInput}
-            keyboardType = 'numeric'
-            onChangeText = {(text)=> this.onChange(text)}
-            value = {this.state.timeSelected}
-            placeHolder="Select a time"
-          /> 
-          <Text>minutes</Text>
-       </View>
-        
-        <View style={styles.countdownContainer}>
-            <CountdownTimer secondsRemaining={this.state.timeSelected * 60} />
-        </View>
-
-        <View style={styles.navContainer}>
-          <Text style={styles.navItem}>Home</Text>
-          <Text style={styles.navItem}>History</Text>
-          <Text style={styles.navItem}>Settings</Text>
-        </View>
-
-      </View>
-    );
-  }
+function cacheFonts(fonts) {
+    return fonts.map(font => Font.loadAsync(font));
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch'
-  },
-  formContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  countdownContainer: {
-    flex: 2,
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  navContainer: {
-    flexDirection: 'row',
-    height: 80,
-    backgroundColor: '#fafafa',
-    padding: 20   
-    },
-  navItem: {
-    flex: 1,
-    textAlign: 'center'
+export default class App extends Component {
+    constructor() {
+        super();
+        this.state = {
+            isReady: false,
+        }
+    }
 
-  },
-  timeInput: {
-    height: 60,
-    width: 60,
-    borderColor: 'grey',
-    borderWidth: 1,
-    fontSize: 25,
-    color: 'grey',
-    fontWeight: 'bold'
-  }
-});
+    async _loadAssetsAsync() {
+        const fontAssets = cacheFonts([
+            {RobotoBold: require('./app/assets/fonts/Roboto-Bold.ttf')},
+            {RobotoMedium: require('./app/assets/fonts/Roboto-Medium.ttf')},
+            {RobotoRegular: require('./app/assets/fonts/Roboto-Regular.ttf')},
+            {RobotoLight: require('./app/assets/fonts/Roboto-Light.ttf')}
+        ]);
+
+        await Promise.all([...fontAssets]);
+    }
+
+    render() {
+        if (!this.state.isReady) {
+            return (
+                <AppLoading
+                    startAsync={this._loadAssetsAsync}
+                    onFinish={() => this.setState({isReady: true})}
+                    onError={console.warn}
+                />
+            );
+        }
+        
+        return (
+            <Provider store={store}>
+                    <Router/>
+            </Provider>
+        );
+    }
+}
