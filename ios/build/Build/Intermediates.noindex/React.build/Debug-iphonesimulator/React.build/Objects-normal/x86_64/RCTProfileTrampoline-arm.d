@@ -1,0 +1,4 @@
+dependencies: \
+  /Users/cecily/Development/writing-tracker-app/node_modules/react-native/React/Profiler/RCTProfileTrampoline-arm.S \
+  /Users/cecily/Development/writing-tracker-app/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/cecily/Development/writing-tracker-app/node_modules/react-native/React/Profiler/RCTMacros.h
