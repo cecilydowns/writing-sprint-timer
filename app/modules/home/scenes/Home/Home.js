@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation } from 'react-native';
 import styles from "./styles"
 import Buttons from '../../components/Buttons'
+import Timer from '../../components/Timer'
 
 class Home extends React.Component {
 
@@ -48,7 +49,7 @@ class Home extends React.Component {
             if(this.state.time === 0){
                return <Buttons onTimerStart={this.onTimerStart} />
             } else {
-               return <Text>A great timer is in place!!!! {this.state.time}</Text>
+               return <Timer />
             }
         }
 
