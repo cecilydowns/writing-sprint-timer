@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     },
 
     topContainer:{
-        height: 300,
         paddingHorizontal:25,
         paddingVertical:35,
         justifyContent:"space-around",
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
     },
 
     bottomContainer:{
-        flex: 1,
+        flex: 2,
         backgroundColor:"white",
         padding: padding * 3,
         shadowColor: "#000000",
