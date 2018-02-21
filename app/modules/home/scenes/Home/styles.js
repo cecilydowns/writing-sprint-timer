@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     },
 
     topContainer:{
-        flex:1,
+        height: 300,
         paddingHorizontal:25,
         paddingVertical:35,
         justifyContent:"space-around",
