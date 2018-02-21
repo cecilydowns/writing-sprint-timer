@@ -10,10 +10,12 @@ const styles = StyleSheet.create({
 
     topContainer:{
         flex:1,
-        paddingHorizontal:15,
-        paddingBottom: padding * 2,
-        justifyContent:"center",
+        paddingHorizontal:25,
+        paddingVertical:35,
+        justifyContent:"space-around",
         alignItems:"center",
+        flexDirection: 'row',
+        flexWrap: 'wrap',        
         backgroundColor: "#FF553F",
     },
 
@@ -38,7 +40,17 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         justifyContent:"center",
         alignItems:"center",
-        backgroundColor:'white'
+        backgroundColor:'white',
+        marginVertical: 5,
+    },
+
+    timeNumber: {
+        fontSize: 30,
+        marginBottom: -5
+    },
+
+    timeText: {
+        color: '#666'
     }
 
 });
