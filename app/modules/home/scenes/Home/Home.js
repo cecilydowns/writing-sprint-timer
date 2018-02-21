@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation } from 'react-native';
 import styles from "./styles"
-import { Actions } from 'react-native-router-flux'
 import Buttons from '../../components/Buttons'
 
 class Home extends React.Component {
@@ -10,7 +9,8 @@ class Home extends React.Component {
         super()
 
         this.state = {
-            layout: 'index'
+            layout: 'index',
+            time: 0
         }
 
         if (Platform.OS === 'android') {
@@ -24,8 +24,10 @@ class Home extends React.Component {
     
     onTimerStart = (time) => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-
-        this.setState({ layout: 'timer' })
+        this.setState({ 
+            layout: 'timer',
+            time: time
+        })
         // 1. change layout in state.
         // 2. somehow hide the buttons and display timer component.
     }
@@ -42,13 +44,19 @@ class Home extends React.Component {
             }
         }
 
+        const timerArea = () => {
+            if(this.state.time === 0){
+               return <Buttons onTimerStart={this.onTimerStart} />
+            } else {
+               return <Text>A great timer is in place!!!! {this.state.time}</Text>
+            }
+        }
+
 
         return (
           <View style={styles.container}>
               <View style={[styles.topContainer, topContainerHeight()]}>
-
-                <Buttons onTimerStart={this.onTimerStart} />
-
+                {timerArea()}
               </View>
 
 
