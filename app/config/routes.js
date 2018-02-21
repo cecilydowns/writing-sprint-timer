@@ -14,8 +14,6 @@ import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
 
 // Home scenes
 import Home from '../modules/home/scenes/Home';
-import Timer from '../modules/home/scenes/Timer';
-
 
 //Import Store, actions
 import store from '../redux/store'
@@ -60,7 +58,6 @@ export default class extends React.Component {
 
                     <Stack key="Main" initial={this.state.isLoggedIn}>
                         <Scene key="Home" component={Home} title="Home" initial={true} type={ActionConst.REPLACE}/>
-                        <Scene key="Timer" component={Timer} title="Timer" type={ActionConst.REPLACE}/>
                     </Stack>
 
                 </Scene>
