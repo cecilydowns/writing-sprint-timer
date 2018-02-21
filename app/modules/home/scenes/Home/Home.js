@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Platform, UIManager } from 'react-native';
+import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation } from 'react-native';
 import styles from "./styles"
 import { Actions } from 'react-native-router-flux'
 import Buttons from '../../components/Buttons'
@@ -23,6 +23,8 @@ class Home extends React.Component {
     // and one for 'timer completed.'
     
     onTimerStart = (time) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+
         this.setState({ layout: 'timer' })
         // 1. change layout in state.
         // 2. somehow hide the buttons and display timer component.
