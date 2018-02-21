@@ -3,6 +3,8 @@ import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation } fr
 import styles from "./styles"
 import Buttons from '../../components/Buttons'
 import Timer from '../../components/Timer'
+import TimerComplete from '../../components/TimerComplete'
+
 
 class Home extends React.Component {
 
@@ -33,6 +35,26 @@ class Home extends React.Component {
         // 2. somehow hide the buttons and display timer component.
     }
 
+
+    onTimerComplete = (time) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+        this.setState({ 
+            layout: 'complete',
+            time: time
+        })
+        // 1. change layout in state.
+        // 2. somehow hide the buttons and display timer component.
+    }
+
+
+    onTimerSave = (time) => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+        this.setState({ 
+            layout: 'index',
+            time: 0
+        })
+    }
+
     render() {
 
         const topContainerHeight = () => {
@@ -46,10 +68,12 @@ class Home extends React.Component {
         }
 
         const timerArea = () => {
-            if(this.state.time === 0){
+            if(this.state.layout === 'index'){
                return <Buttons onTimerStart={this.onTimerStart} />
-            } else {
-               return <Timer />
+            } else if(this.state.layout === 'timer') {
+               return <Timer time={this.state.time} onTimerComplete={this.onTimerComplete} />
+            } else if(this.state.layout === 'complete') {
+                return <TimerComplete time={this.state.time} onTimerSave={this.onTimerSave} />
             }
         }
 
