@@ -4,6 +4,7 @@ import styles from "./styles"
 import Buttons from '../../components/Buttons'
 import Timer from '../../components/Timer'
 import TimerComplete from '../../components/TimerComplete'
+import TimerCompleteForm from '../../components/TimerCompleteForm'
 
 import { connect } from 'react-redux';
 import { createSprint } from '../../actions'
@@ -78,10 +79,19 @@ class Home extends React.Component {
             } else if(this.state.layout === 'timer') {
                return <Timer time={this.state.time} onTimerComplete={this.onTimerComplete} />
             } else if(this.state.layout === 'complete') {
-                return <TimerComplete time={this.state.time} onTimerSave={this.onTimerSave} />
+                return <TimerComplete time={this.state.time} />
             }
         }
 
+        const bottomArea = () => {
+            if(this.state.layout === 'index'){
+                return <Text>"Index" layout: display preview of some stats or inspirational message.</Text>
+             } else if(this.state.layout === 'timer') {
+                return <Text>"Timer" layout: display button to cancel, and maybe pause</Text>
+             } else if(this.state.layout === 'complete') {
+                 return <TimerCompleteForm time={this.state.time} onTimerSave={this.onTimerSave} />
+             }
+        }
 
         return (
           <View style={styles.container}>
@@ -90,9 +100,7 @@ class Home extends React.Component {
               </View>
 
               <View style={styles.bottomContainer}>
-                <Text>"Index" layout: display preview of some stats or inspirational message.</Text>
-                <Text>"Timer" layout: display button to cancel, and maybe pause</Text>
-                <Text>"Complete" layout: area to enter word count info and save</Text>
+                {bottomArea()}
               </View>
           </View>
         );
