@@ -8,7 +8,7 @@ class TimerComplete extends React.Component {
         return (
             <View>
                 <Text>You did it!!!!</Text>
-                <Button title="reset..." onPress={this.props.onTimerSave} />
+                <Button title="reset..." onPress={() => {this.props.onTimerSave(60, 1543)}} />
             </View>
         );
     }
