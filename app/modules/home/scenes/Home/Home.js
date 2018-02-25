@@ -5,11 +5,13 @@ import Buttons from '../../components/Buttons'
 import Timer from '../../components/Timer'
 import TimerComplete from '../../components/TimerComplete'
 
+import { connect } from 'react-redux';
+import { createSprint } from '../../actions'
 
 class Home extends React.Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
         this.state = {
             layout: 'index',
@@ -47,7 +49,10 @@ class Home extends React.Component {
     }
 
 
-    onTimerSave = (time) => {
+    onTimerSave = (time, words) => {
+
+        this.props.createSprint({ time, words })
+
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
         this.setState({ 
             layout: 'index',
@@ -84,11 +89,10 @@ class Home extends React.Component {
                 {timerArea()}
               </View>
 
-
               <View style={styles.bottomContainer}>
-                <Text>Some encouragement about writing every day,
-                    or activity stats.
-                </Text>
+                <Text>"Index" layout: display preview of some stats or inspirational message.</Text>
+                <Text>"Timer" layout: display button to cancel, and maybe pause</Text>
+                <Text>"Complete" layout: area to enter word count info and save</Text>
               </View>
           </View>
         );
@@ -96,4 +100,4 @@ class Home extends React.Component {
 }
 
 
-export default Home
+export default connect(null, { createSprint })(Home)
