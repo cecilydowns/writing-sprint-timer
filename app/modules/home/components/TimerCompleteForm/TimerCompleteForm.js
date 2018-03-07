@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Button } from 'react-native';
+import { Text, View, TouchableOpacity, Button, TextInput } from 'react-native';
 import { FormLabel, FormInput } from 'react-native-elements'
 import styles from './styles';
 
@@ -7,7 +7,7 @@ class TimerCompleteForm extends React.Component {
     constructor(){
         super()
         this.state = {
-            words: 0
+            words: "0"
         }
 
     }
@@ -15,7 +15,7 @@ class TimerCompleteForm extends React.Component {
 
     onChangeText = (value) => {
         this.setState({
-            words: parseInt(value)
+            words: value
         })
     }
 
@@ -24,6 +24,7 @@ class TimerCompleteForm extends React.Component {
             <View>
                 <FormLabel>Words Written</FormLabel>
                 <FormInput
+                    keyboardType={'numeric'}
                     autoCapitalize='none'
                     clearButtonMode='while-editing'
                     underlineColorAndroid={"#fff"}
