@@ -1,32 +1,24 @@
-import firebase from "../../config/firebase";
+const domain = "https://writing-tracker-api.herokuapp.com"
+import { AsyncStorage } from 'react-native';
 
-const auth = firebase.auth();
-const database = firebase.database();
+export async function createSprint (sprint, callback) {
 
-let uid
+    const token = await AsyncStorage.getItem('jwt')
 
-firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-        uid = user.uid
-    } else {
-        uid = null
-    }
-  });
+    // console.log("Token:")
+    // console.log(token)
 
-//Create the user object in realtime database
-export function createSprint (sprint, callback) {
-
-    // database.ref('users').child(user.uid).update({ ...data })
-    let ref = database.ref('sprints/' + uid).push({
-        time: sprint.time,
-        words: sprint.words
+    return fetch(`${domain}/sprints`,
+    {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `JWT ${token}`
+        },
+        body: JSON.stringify(sprint)
     })
-
+    // .then((response) => response.json())
+    .then((sprint) => callback(true, sprint, null))
+    .catch((error) => callback(false, null, error)) 
 
 }
-
-
-
-//  https://firebase.google.com/docs/database/web/structure-data?authuser=0
-//  https://firebase.google.com/docs/database/web/read-and-write?authuser=0
-
