@@ -4,33 +4,33 @@ import firebase from "../../config/firebase";
 
 import { AsyncStorage } from 'react-native';
 
-export function register(data, successCB, errorCB) {
+export function register(user, successCB, errorCB) {
     return (dispatch) => {
-        api.register(data, function (success, data, error) {
-            if (success) successCB(data);
-            else if (error) errorCB(error)
-        });
-    };
-}
-
-export function createUser(user, successCB, errorCB) {
-    return (dispatch) => {
-        // console.log("WHAT'S USER HERE?")
-        // console.log(user)
-        api.createUser(user, function (success, data, error) {
+        api.register(user, function (success, data, error) {
             if (success) {
                 dispatch({type: t.LOGGED_IN, data: user});
+                AsyncStorage.setItem('user', JSON.stringify(user))
+                AsyncStorage.setItem('jwt', data.token)
                 successCB();
-            }else if (error) errorCB(error)
+            } else if (error) errorCB(error)
         });
     };
 }
 
-export function login(data, successCB, errorCB) {
+
+
+export function login(user, successCB, errorCB) {
     return (dispatch) => {
-        api.login(data, function (success, data, error) {
+        api.login(user, function (success, data, error) {
             if (success) {
-                if (data.exists) dispatch({type: t.LOGGED_IN, data: data.user});
+                console.log("LOGIN ACTION")
+                console.log("Data:")
+                console.log(data)
+                console.log("User:")
+                console.log(user)
+                if (data.exists) dispatch({type: t.LOGGED_IN, data: user});
+                AsyncStorage.setItem('user', JSON.stringify(user))
+                AsyncStorage.setItem('jwt', data.token)
                 successCB(data);
             }else if (error) errorCB(error)
         });
@@ -48,32 +48,42 @@ export function resetPassword(data, successCB, errorCB) {
 
 export function signOut(successCB, errorCB) {
     return (dispatch) => {
-        api.signOut(function (success, data, error) {
-            if (success) {
-                dispatch({type: t.LOGGED_OUT});
-                successCB();
-            }else if (error) errorCB(error)
-        });
+
+        dispatch({type: t.LOGGED_OUT})
+        AsyncStorage.multiRemove(['user', 'jwt'], (err) => {
+            if(err){
+                errorCB()
+            } else {
+                successCB()
+            }
+        })
+
+        // api.signOut(function (success, data, error) {
+        //     if (success) {
+        //         dispatch({type: t.LOGGED_OUT});
+        //         successCB();
+        //     }else if (error) errorCB(error)
+        // });
     };
 }
 
 export function checkLoginStatus(callback) {
     return (dispatch) => {
-        firebase.auth().onAuthStateChanged((user) => {
-            let isLoggedIn = (user !== null);
 
-            if (isLoggedIn) {
-                //get the user object from the Async storage
-                AsyncStorage.getItem('user', (err, user) => {
-                    if (user === null) isLoggedIn = false //set the loggedIn value to false
-                    else dispatch({type: t.LOGGED_IN, data: JSON.parse(user)})
+        // So what do I actually want to do here?
+        //get the user object from the Async storage
 
-                    callback(isLoggedIn);
-                });
-            } else {
+        AsyncStorage.getItem('user', (err, user) => {
+            if (user === null) {
                 dispatch({type: t.LOGGED_OUT});
-                callback(isLoggedIn);
-            }
+                callback(false);
+            } else {
+                dispatch({type: t.LOGGED_IN, data: JSON.parse(user)})
+                callback(true);
+            } 
         });
-    };
+        
+                // callback(isLoggedIn);
+    }    
+
 }
