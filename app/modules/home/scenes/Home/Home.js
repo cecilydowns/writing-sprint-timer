@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation } from 'react-native';
+import { Text, View, TouchableOpacity, Platform, UIManager, LayoutAnimation, Button } from 'react-native';
 import styles from "./styles"
 import Buttons from '../../components/Buttons'
 import Timer from '../../components/Timer'
@@ -8,6 +8,11 @@ import TimerCompleteForm from '../../components/TimerCompleteForm'
 
 import { connect } from 'react-redux';
 import { createSprint } from '../../actions'
+
+import { signOut } from '../../../auth/actions.js'
+
+import { Actions } from 'react-native-router-flux';
+
 
 class Home extends React.Component {
 
@@ -49,17 +54,20 @@ class Home extends React.Component {
         // 2. somehow hide the buttons and display timer component.
     }
 
+    onLogOut = () => {
+        this.props.signOut(Actions.Welcome, Actions.Main)
+    }
 
-    onTimerSave = (time, words) => {
+    onTimerSave = (length, words) => {
 
-        this.props.createSprint({ time, words })
+        this.props.createSprint({ length, words }, Actions.Main, Actions.Main)
 
         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
         this.setState({ 
             layout: 'index',
             time: 0
         })
-    }
+    } 
 
     render() {
 
@@ -101,11 +109,13 @@ class Home extends React.Component {
 
               <View style={styles.bottomContainer}>
                 {bottomArea()}
+                <Button title="Logout" onPress={this.onLogOut} />
               </View>
+
           </View>
         );
     }
 }
 
 
-export default connect(null, { createSprint })(Home)
+export default connect(null, { createSprint, signOut })(Home)
