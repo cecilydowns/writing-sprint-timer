@@ -65,7 +65,7 @@ class Register extends React.Component {
     }
 
     onSuccess(user) {
-        Actions.CompleteProfile({ user })
+        Actions.Main()
     }
 
     onError(error) {

@@ -8,7 +8,6 @@ import Splash from '../components/Splash/Splash';
 //Authentication Scenes
 import Welcome from '../modules/auth/scenes/Welcome';
 import Register from '../modules/auth/scenes/Register';
-import CompleteProfile from '../modules/auth/scenes/CompleteProfile';
 import Login from '../modules/auth/scenes/Login';
 import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
 
@@ -50,8 +49,8 @@ export default class extends React.Component {
                     <Stack key="Auth" initial={!this.state.isLoggedIn}>
                         <Scene key="Welcome" component={Welcome} title="" initial={true} hideNavBar/>
                         <Scene key="Register" component={Register} title="" back/>
-                        <Scene key="CompleteProfile" component={CompleteProfile} title="Select Username"
-                                   back={false}/>
+                        {/* <Scene key="CompleteProfile" component={CompleteProfile} title="Select Username"
+                                   back={false}/> */}
                         <Scene key="Login" component={Login} title="Login"/>
                         <Scene key="ForgotPassword" component={ForgotPassword} title="ForgotPassword"/>
                     </Stack>
