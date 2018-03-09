@@ -55,7 +55,7 @@ export default class extends React.Component {
                         <Scene key="ForgotPassword" component={ForgotPassword} title="ForgotPassword"/>
                     </Stack>
 
-                    <Stack key="Main" initial={this.state.isLoggedIn}>
+                    <Stack key="Main" initial={this.state.isLoggedIn} hideNavBar>
                         <Scene key="Home" component={Home} title="Home" initial={true} type={ActionConst.REPLACE}/>
                     </Stack>
 
