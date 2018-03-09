@@ -1,4 +1,4 @@
-const domain = "https://writing-tracker-api.herokuapp.com"
+const domain = "http://localhost:7777"
 
 //Register the user using email and password
 export function register(user, callback) {

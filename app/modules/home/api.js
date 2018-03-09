@@ -1,4 +1,4 @@
-const domain = "https://writing-tracker-api.herokuapp.com"
+const domain = "http://localhost:7777"
 import { AsyncStorage } from 'react-native';
 
 export async function createSprint (sprint, callback) {
