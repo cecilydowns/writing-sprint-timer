@@ -5,12 +5,14 @@ import firebase from "../../config/firebase";
 
 export function createSprint(sprint, successCB, errorCB) {
     return (dispatch) => {
-        console.log('in da create sprint action')
+        sprint.words = parseInt(sprint.words)
         api.createSprint(sprint, function (success, data, error) {
             if (success) {
                 dispatch({type: t.CREATE_SPRINT, data: sprint});
                 successCB();
-            }else if (error) errorCB(error)
+            } else if (error) {
+                errorCB(error)
+            }
         });
     };
 }
