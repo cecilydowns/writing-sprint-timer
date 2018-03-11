@@ -14,7 +14,7 @@ export default class FooterItem extends React.Component {
     render() {
         return (
             <View style={styles.itemContainer}>
-            <Icon name={this.props.icon} color='#666' />
+            <Icon name={this.props.icon} color='#666' onPress={this.props.click} />
                 <Text style={styles.itemText}>{this.props.text}</Text>
             </View>
         );
