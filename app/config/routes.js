@@ -13,6 +13,9 @@ import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
 
 // Home scenes
 import Home from '../modules/home/scenes/Home';
+import Settings from '../modules/settings/scenes/Settings'
+import Projects from '../modules/projects/scenes/Home'
+import NewProject from '../modules/projects/scenes/New'
 
 //Import Store, actions
 import store from '../redux/store'
@@ -57,7 +60,12 @@ export default class extends React.Component {
 
                     <Stack key="Main" initial={this.state.isLoggedIn} hideNavBar>
                         <Scene key="Home" component={Home} title="Home" initial={true} type={ActionConst.REPLACE}/>
+                        <Scene key="Settings" component={Settings} title="Settings" />
+                        <Scene key="Projects" component={Projects} title="Projects" />
+                        <Scene key="NewProject" component={NewProject} title="NewProject" />
                     </Stack>
+
+
 
                 </Scene>
             </Router>
