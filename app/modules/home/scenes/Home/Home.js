@@ -5,7 +5,7 @@ import Buttons from '../../components/Buttons'
 import Timer from '../../components/Timer'
 import TimerComplete from '../../components/TimerComplete'
 import TimerCompleteForm from '../../components/TimerCompleteForm'
-import Header from '../../components/Header'
+import Header from '../../../../components/Header'
 import Footer from '../../../../components/Footer'
 
 import { connect } from 'react-redux';
@@ -116,6 +116,7 @@ class Home extends React.Component {
                 {bottomArea()}
                 <Button title="Logout" onPress={this.onLogOut} />
               </View>
+
 
               <Footer />
 
