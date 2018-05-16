@@ -7,7 +7,7 @@ class Buttons extends React.Component {
     render() {
         return (
             <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={() => {this.props.onTimerStart(30)}} style={styles.timeButton}>
+                <TouchableOpacity onPress={() => {this.props.onTimerStart(0.1)}} style={styles.timeButton}>
                     <Text>
                         <Text style={styles.timeNumber}>30</Text>
                         <Text style={styles.timeText}>min</Text>
